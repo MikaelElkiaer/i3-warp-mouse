@@ -14,6 +14,7 @@ var lastUpdate int64 = 0
 
 func main() {
 	recv := i3.Subscribe(i3.WindowEventType)
+	defer recv.Close()
 	for recv.Next() {
 		if e, ok := recv.Event().(*i3.WindowEvent); ok && e.Change == "focus" {
 			log.Printf("Change: %s", e.Change)
